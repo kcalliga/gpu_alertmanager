@@ -7,10 +7,9 @@ spec:
   groups:
   - name: gputemp-rule
     rules:
-    - alert: gputemp 
-      expr: >
-      DCGM_FI_DEV_GPU_TEMP
-        > 30
+    - alert: gputemp
+      expr:
+        DCGM_FI_DEV_GPU_TEMP  > 30
       labels:
         severity: critical
       annotations:
