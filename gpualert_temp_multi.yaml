@@ -9,9 +9,8 @@ spec:
     rules:
     - alert: gputemp
       expr:
-        group_by (namespace,service, integration)
-        DCGM_FI_DEV_GPU_TEMP  > 30
+        group_by (Hostname, modelName, gpu) (DCGM_FI_DEV_GPU_TEMP)  > 30
       labels:
         severity: critical
       annotations:
-        description: GPU Temperature is over 30 degree Celsius
+        description: 'GPU Temperature on {{$labels.Hostname}}, {{$labels.modelName}}, {{$labels.gpu}} is over 30'
