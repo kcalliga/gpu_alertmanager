@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: gputemp
+  namespace: nvidia-gpu-operator
+spec:
+  groups:
+  - name: gputemp-rule
+    rules:
+    - alert: gputemp
+      expr:
+        group_by (namespace,service, integration)
+        DCGM_FI_DEV_GPU_TEMP  > 30
+      labels:
+        severity: critical
+      annotations:
+        description: GPU Temperature is over 30 degree Celsius
